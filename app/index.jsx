@@ -1,24 +1,16 @@
 import { Colors } from "@/constants/Colors";
-import {
-  Appearance,
-  Platform,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-} from "react-native";
+import { Appearance, Platform, StyleSheet, Text } from "react-native";
 import TextInputComp from "../components/TextInputComp";
 import FlatListComp from "../components/FlatListComp";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   const colorScheme = Appearance.getColorScheme();
   const theme = colorScheme === "dark" ? Colors.dark : Colors.light;
-  const styles = createStyles(theme, colorScheme);
-
-  const Container = Platform.OS === "web" ? ScrollView : SafeAreaView;
+  const styles = createStyles(theme);
 
   return (
-    <Container
+    <SafeAreaView
       style={styles.view}
       contentContainerStyle={
         Platform.OS === "web" ? styles.contentContainer : null
@@ -29,7 +21,7 @@ export default function Index() {
       <TextInputComp />
 
       <FlatListComp />
-    </Container>
+    </SafeAreaView>
   );
 }
 

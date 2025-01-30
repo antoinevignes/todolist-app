@@ -13,7 +13,7 @@ import {
 export default function FlatListComp() {
   const colorScheme = Appearance.getColorScheme();
   const theme = colorScheme === "dark" ? Colors.dark : Colors.light;
-  const styles = createStyles(theme, colorScheme);
+  const styles = createStyles(theme);
 
   const { tasks, handleDelete, toggleTask } = useTask();
 

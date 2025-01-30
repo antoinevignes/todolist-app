@@ -1,18 +1,10 @@
 import { IconSymbol } from "@/components/ui/IconSymbol";
-import { Colors } from "@/constants/Colors";
 import { useTask } from "@/contexts/TaskContext";
-import {
-  Appearance,
-  FlatList,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { useTheme } from "@/contexts/ThemeContext";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function FlatListComp() {
-  const colorScheme = Appearance.getColorScheme();
-  const theme = colorScheme === "dark" ? Colors.dark : Colors.light;
+  const { theme } = useTheme();
   const styles = createStyles(theme);
 
   const { tasks, handleDelete, toggleTask } = useTask();
@@ -26,15 +18,7 @@ export default function FlatListComp() {
         {item.title}
       </Text>
 
-      <Pressable
-        onPress={() => handleDelete(item.id)}
-        style={({ pressed }) => [
-          {
-            backgroundColor: pressed ? "lightgray" : "white",
-          },
-          styles.button,
-        ]}
-      >
+      <Pressable onPress={() => handleDelete(item.id)} style={styles.button}>
         <IconSymbol name="trash" color={theme.background} />
       </Pressable>
     </View>
@@ -59,6 +43,7 @@ function createStyles(theme) {
     text: {
       color: theme.text,
       fontSize: 16,
+      fontFamily: "Inter_500Medium",
     },
     flatListContent: {
       alignItems: "center",
@@ -76,6 +61,7 @@ function createStyles(theme) {
     button: {
       padding: 4,
       borderRadius: 5,
+      backgroundColor: theme.text,
     },
     completedText: {
       textDecorationLine: "line-through",

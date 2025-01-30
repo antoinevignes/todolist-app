@@ -1,15 +1,18 @@
 import { Stack } from "expo-router";
 import { TaskProvider } from "@/contexts/TaskContext";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { ThemeProvider } from "../contexts/ThemeContext";
 
 export default function RootLayout() {
   return (
-    <SafeAreaProvider>
+    <ThemeProvider>
       <TaskProvider>
-        <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-        </Stack>
+        <SafeAreaProvider>
+          <Stack>
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+          </Stack>
+        </SafeAreaProvider>
       </TaskProvider>
-    </SafeAreaProvider>
+    </ThemeProvider>
   );
 }

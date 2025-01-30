@@ -1,13 +1,22 @@
-import { Colors } from "@/constants/Colors";
-import { Appearance, Platform, StyleSheet, Text } from "react-native";
+import { Platform, StyleSheet, Text } from "react-native";
 import TextInputComp from "../components/TextInputComp";
 import FlatListComp from "../components/FlatListComp";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { Inter_500Medium, useFonts } from "@expo-google-fonts/inter";
+import { useTheme } from "@/contexts/ThemeContext";
+
 export default function Index() {
-  const colorScheme = Appearance.getColorScheme();
-  const theme = colorScheme === "dark" ? Colors.dark : Colors.light;
+  const { theme } = useTheme();
   const styles = createStyles(theme);
+
+  const [loaded, error] = useFonts({
+    Inter_500Medium,
+  });
+
+  if (!loaded && !error) {
+    return null;
+  }
 
   return (
     <SafeAreaView
@@ -42,10 +51,12 @@ function createStyles(theme) {
       padding: 40,
       fontSize: 24,
       textAlign: "center",
+      fontFamily: "Inter_500Medium",
     },
     text: {
       color: theme.text,
       fontSize: 16,
+      fontFamily: "Inter_500Medium",
     },
   });
 }

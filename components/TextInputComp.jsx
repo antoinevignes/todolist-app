@@ -1,18 +1,9 @@
-import { Colors } from "@/constants/Colors";
 import { useTask } from "@/contexts/TaskContext";
-import {
-  Button,
-  View,
-  TextInput,
-  Appearance,
-  StyleSheet,
-  Pressable,
-  Text,
-} from "react-native";
+import { useTheme } from "@/contexts/ThemeContext";
+import { View, TextInput, StyleSheet, Pressable, Text } from "react-native";
 
 export default function TextInputComp() {
-  const colorScheme = Appearance.getColorScheme();
-  const theme = colorScheme === "dark" ? Colors.dark : Colors.light;
+  const { theme } = useTheme();
   const styles = createStyles(theme);
 
   const { input, setInput, handleAddTask } = useTask();
@@ -28,16 +19,8 @@ export default function TextInputComp() {
         }}
         onSubmitEditing={handleAddTask}
       />
-      <Pressable
-        onPress={handleAddTask}
-        style={({ pressed }) => [
-          {
-            backgroundColor: pressed ? "lightgray" : "white",
-          },
-          styles.button,
-        ]}
-      >
-        <Text>Ajouter</Text>
+      <Pressable onPress={handleAddTask} style={styles.button}>
+        <Text style={styles.text}>Ajouter</Text>
       </Pressable>
     </View>
   );
@@ -45,6 +28,11 @@ export default function TextInputComp() {
 
 function createStyles(theme) {
   return StyleSheet.create({
+    text: {
+      color: theme.background,
+      fontSize: 16,
+      fontFamily: "Inter_500Medium",
+    },
     inputContainer: {
       flexDirection: "row",
       alignItems: "center",
@@ -59,10 +47,12 @@ function createStyles(theme) {
       borderWidth: 1,
       borderRadius: 5,
       width: 150,
+      fontFamily: "Inter_500Medium",
     },
     button: {
       padding: 8,
       borderRadius: 5,
+      backgroundColor: theme.text,
     },
   });
 }

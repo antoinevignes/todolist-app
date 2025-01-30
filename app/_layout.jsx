@@ -8,8 +8,9 @@ export default function RootLayout() {
     <ThemeProvider>
       <TaskProvider>
         <SafeAreaProvider>
-          <Stack>
-            <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="index" />
+            <Stack.Screen name="tasks/[id]" />
           </Stack>
         </SafeAreaProvider>
       </TaskProvider>

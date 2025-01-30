@@ -8,16 +8,18 @@ export default function FlatListComp() {
   const { theme } = useTheme();
   const styles = createStyles(theme);
 
-  const { tasks, handleDelete, toggleTask } = useTask();
+  const { tasks, handleDelete, toggleTask, handlePress } = useTask();
 
   const renderItem = ({ item }) => (
     <View style={styles.taskItem}>
-      <Text
-        style={[styles.text, item.completed && styles.completedText]}
-        onPress={() => toggleTask(item.id)}
+      <Pressable
+        onPress={() => handlePress(item.id)}
+        onLongPress={() => toggleTask(item.id)}
       >
-        {item.title}
-      </Text>
+        <Text style={[styles.text, item.completed && styles.completedText]}>
+          {item.title}
+        </Text>
+      </Pressable>
 
       <Pressable onPress={() => handleDelete(item.id)} style={styles.button}>
         <IconSymbol name="trash" color={theme.background} />

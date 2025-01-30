@@ -13,6 +13,7 @@ export default function TextInputComp() {
     <View style={styles.inputContainer}>
       <TextInput
         style={styles.textInput}
+        maxLength={30}
         placeholder="Ajouter une tâche"
         value={input}
         onChangeText={(text) => {

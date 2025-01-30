@@ -1,11 +1,14 @@
 import { createContext, useContext, useState } from "react";
 import { data } from "@/data/tasks";
+import { useRouter } from "expo-router";
 
 const TaskContext = createContext();
 
 export function TaskProvider({ children }) {
   const [input, setInput] = useState("");
   const [tasks, setTasks] = useState([]);
+
+  const router = useRouter();
 
   const handleAddTask = () => {
     if (input.trim()) {
@@ -27,6 +30,10 @@ export function TaskProvider({ children }) {
     );
   };
 
+  const handlePress = (id) => {
+    router.push(`/tasks/${id}`);
+  };
+
   return (
     <TaskContext.Provider
       value={{
@@ -37,6 +44,7 @@ export function TaskProvider({ children }) {
         handleAddTask,
         handleDelete,
         toggleTask,
+        handlePress,
       }}
     >
       {children}

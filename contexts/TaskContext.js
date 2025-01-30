@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-import { data } from "@/data/tasks";
 import { useRouter } from "expo-router";
 
 const TaskContext = createContext();

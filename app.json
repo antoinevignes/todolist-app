@@ -9,13 +9,18 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.avignes.crud",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.avignes.crud"
     },
     "web": {
       "bundler": "metro",
@@ -43,7 +48,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "8e49ca5c-893a-4638-907b-b6d3b6e23a15"
+        "projectId": "9c643da3-085b-44ff-b904-d8f897260278"
       }
     },
     "owner": "avignes"

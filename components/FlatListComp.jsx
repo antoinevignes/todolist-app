@@ -60,7 +60,7 @@ function createStyles(theme) {
       borderBottomColor: theme.text,
       width: 300,
       flexDirection: "row",
-      justifyContent: "space-around",
+      justifyContent: "space-between",
       alignItems: "center",
     },
     button: {

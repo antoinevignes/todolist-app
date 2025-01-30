@@ -1,7 +1,8 @@
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { useTask } from "@/contexts/TaskContext";
 import { useTheme } from "@/contexts/ThemeContext";
-import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import Animated, { LinearTransition } from "react-native-reanimated";
 
 export default function FlatListComp() {
   const { theme } = useTheme();
@@ -25,7 +26,7 @@ export default function FlatListComp() {
   );
 
   return (
-    <FlatList
+    <Animated.FlatList
       contentContainerStyle={styles.flatListContent}
       showsVerticalScrollIndicator={false}
       ListEmptyComponent={
@@ -34,6 +35,8 @@ export default function FlatListComp() {
       keyExtractor={(item) => item.id}
       data={tasks}
       renderItem={renderItem}
+      itemLayoutAnimation={LinearTransition}
+      keyboardDismissMode="on-drag"
     />
   );
 }

@@ -5,14 +5,12 @@ const TaskContext = createContext();
 
 export function TaskProvider({ children }) {
   const [input, setInput] = useState("");
-  const [tasks, setTasks] = useState(data);
+  const [tasks, setTasks] = useState([]);
 
   const handleAddTask = () => {
     if (input.trim()) {
-      setTasks([
-        ...tasks,
-        { id: tasks.length + 1, title: input.trim(), completed: false },
-      ]);
+      const newId = tasks.length > 0 ? tasks[0].id + 1 : 1;
+      setTasks([{ id: newId, title: input, completed: false }, ...tasks]);
       setInput("");
     }
   };

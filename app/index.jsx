@@ -2,17 +2,57 @@ import { Platform, StyleSheet, Text } from "react-native";
 import TextInputComp from "../components/TextInputComp";
 import FlatListComp from "../components/FlatListComp";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
 
 import { Inter_500Medium, useFonts } from "@expo-google-fonts/inter";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useEffect } from "react";
+
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useTask } from "@/contexts/TaskContext";
+import { data } from "@/data/tasks";
 
 export default function Index() {
-  const { theme } = useTheme();
+  const { theme, colorScheme } = useTheme();
   const styles = createStyles(theme);
+
+  const { tasks, setTasks } = useTask();
 
   const [loaded, error] = useFonts({
     Inter_500Medium,
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const jsonValue = await AsyncStorage.getItem("TodoApp");
+        const storageTasks = jsonValue !== null ? JSON.parse(jsonValue) : null;
+
+        if (storageTasks && storageTasks.length) {
+          setTasks(storageTasks.sort((a, b) => b.id - a.id));
+        } else {
+          setTasks(data.sort((a, b) => b.id - a.id));
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, [data]);
+
+  useEffect(() => {
+    const storeData = async () => {
+      try {
+        const jsonValue = JSON.stringify(tasks);
+        await AsyncStorage.setItem("TodoApp", jsonValue);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    storeData();
+  }, [tasks]);
 
   if (!loaded && !error) {
     return null;
@@ -30,6 +70,7 @@ export default function Index() {
       <TextInputComp />
 
       <FlatListComp />
+      <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
     </SafeAreaView>
   );
 }

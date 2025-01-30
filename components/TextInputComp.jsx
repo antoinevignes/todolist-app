@@ -1,9 +1,10 @@
 import { useTask } from "@/contexts/TaskContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { View, TextInput, StyleSheet, Pressable, Text } from "react-native";
+import { IconSymbol } from "./ui/IconSymbol";
 
 export default function TextInputComp() {
-  const { theme } = useTheme();
+  const { theme, colorScheme, setColorScheme } = useTheme();
   const styles = createStyles(theme);
 
   const { input, setInput, handleAddTask } = useTask();
@@ -21,6 +22,16 @@ export default function TextInputComp() {
       />
       <Pressable onPress={handleAddTask} style={styles.button}>
         <Text style={styles.text}>Ajouter</Text>
+      </Pressable>
+      <Pressable
+        onPress={() =>
+          setColorScheme(colorScheme === "light" ? "dark" : "light")
+        }
+      >
+        <IconSymbol
+          name={colorScheme === "dark" ? "sun.max.fill" : "moon.fill"}
+          color={theme.text}
+        />
       </Pressable>
     </View>
   );

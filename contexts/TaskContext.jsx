@@ -7,8 +7,6 @@ export function TaskProvider({ children }) {
   const [input, setInput] = useState("");
   const [tasks, setTasks] = useState(data);
 
-  console.log(tasks);
-
   const handleAddTask = () => {
     if (input.trim()) {
       setTasks([

@@ -43,11 +43,12 @@ export default function FlatListComp() {
   return (
     <FlatList
       contentContainerStyle={styles.flatListContent}
+      showsVerticalScrollIndicator={false}
       ListEmptyComponent={
         <Text style={styles.text}>Pas de tâches à faire...</Text>
       }
-      data={tasks}
       keyExtractor={(item) => item.id}
+      data={tasks}
       renderItem={renderItem}
     />
   );

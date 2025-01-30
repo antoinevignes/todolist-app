@@ -7,8 +7,8 @@ import {
   StyleSheet,
   Text,
 } from "react-native";
-import TextInputComp from "./TextInputComp";
-import FlatListComp from "./FlatListComp";
+import TextInputComp from "../components/TextInputComp";
+import FlatListComp from "../components/FlatListComp";
 
 export default function Index() {
   const colorScheme = Appearance.getColorScheme();

@@ -37,6 +37,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "8e49ca5c-893a-4638-907b-b6d3b6e23a15"
+      }
+    },
+    "owner": "avignes"
   }
 }
